@@ -120,8 +120,6 @@ int main(int arc, char* argv[]) {
             readResult = Serial.read(buffer, BUF_LENGTH);
             buffer[readResult] = 0; //저장한 데이터 바로 뒤의 바이트를 초기화
             printf("%s", buffer);
-
-            if(!Serial.connected()) break;
         }
     }
     return 0;
