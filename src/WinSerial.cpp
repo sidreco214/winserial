@@ -14,7 +14,7 @@ WinSerial::WinSerial(const char* COMPort, const unsigned int& baud, const int& B
     //시리얼 연결 확인
     if(hWinSerial == INVALID_HANDLE_VALUE) {
         if(GetLastError() == ERROR_FILE_NOT_FOUND)  {
-            printf("ERROR: Handle was not attached. Reason: %s not available.\n", COMPort);
+            printf("ERROR: Handle was not attached. Reason: %s is not available.\n", COMPort);
         }
         else printf("ERROR!!");
     }
@@ -53,6 +53,10 @@ WinSerial::~WinSerial() {
         connection = false;
         CloseHandle(hWinSerial);
     }
+}
+
+bool WinSerial::connected() {
+    return connection;
 }
 
 int WinSerial::read(char* buffer, unsigned int buf_size) {

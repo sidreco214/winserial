@@ -104,21 +104,25 @@ int main(int arc, char* argv[]) {
         }
     }
 
-    //comport 입력이 없는 경우
-    if(string(comport) == argv[0]) {printf("ERROR: COMPORT is not connncted"); return 0;}
+    //comport가 지정되지 않은 경우
+    if(string(comport) == argv[0]) {printf("ERROR: COMPORT must be assigned!"); return 0;}
     //printf("TEST Baud Rate: %d, Byte Size: %d\n%s is connected\n", baud, ByteSize, comport);
     
     WinSerial Serial(comport, baud, ByteSize, StopBit, Parity, DTR);
 
-    if(Serial.connected()) printf("Baud Rate: %d, Byte Size: %d\n%s is connected\n", baud, ByteSize, comport);
-    
     char buffer[BUF_LENGTH] = "";
     int readResult = 0;
 
-    while(Serial.connected()) {
-        readResult = Serial.read(buffer, BUF_LENGTH);
-        buffer[readResult] = 0; //저장한 데이터 바로 뒤의 바이트를 초기화
-        printf("%s", buffer);
+    if(Serial.connected()) {
+        printf("Baud Rate: %d, Byte Size: %d\n%s is connected\n", baud, ByteSize, comport);
+    
+        while(1) {
+            readResult = Serial.read(buffer, BUF_LENGTH);
+            buffer[readResult] = 0; //저장한 데이터 바로 뒤의 바이트를 초기화
+            printf("%s", buffer);
+
+            if(!Serial.connected()) break;
+        }
     }
     return 0;
 }

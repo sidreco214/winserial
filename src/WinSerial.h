@@ -21,7 +21,7 @@ class WinSerial {
     WinSerial(const char* COMPort, const unsigned int& baud, const int& ByteSize, const int& StopBit, const int& Parity, const int& DTR);
     ~WinSerial();
 
-    inline bool connected() {return this->connection;} //connection 값을 반환, class 내부 인라인 함수는 main에서 로드할 때 cpp까지 같이 include하거나 이렇게 헤더에 정의해야함
+    bool connected();
     int read(char* buffer, unsigned int buf_size); //시리얼 통신으로 읽어온 값을 버퍼에 저장후 읽은 바이트 수를 리턴, 읽을게 없으면 0리턴
     bool send(const char* buffer, unsigned int buf_size); //입력된 값을 시리얼 통신으로 출력, 성공하면 1출력
 };
