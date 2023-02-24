@@ -35,9 +35,11 @@ int main(int arc, char* argv[]) {
 
     //argv 의 첫 문자열은 winserial.exe, arc는 배열 원소 갯수이니
     //그래서 1번 인덱스 부터 arc-1 인덱스까지 검색
-    for(int i=1; i<arc-1; i++) {
+    for(int i=1; i<arc; i++) {
         int arg = -1;
-         for(int j=0; j<sizeof(_arg)/sizeof(p); j++) {if(Arg[j] == argv[i]) arg = j; break;}
+        for(int j=0; j<sizeof(Arg)/sizeof(Arg[0]); j++) {
+            if(Arg[j] == argv[i]) {arg = j; break;}
+        }
         
         switch(arg) {
             default:
